@@ -6,18 +6,18 @@ import { Category } from '../interfaces/Category';
 import { getSimilarPosts, getRecentPosts } from '../services';
 
 interface PostWidgetProps {
-    categories: Category;
+    categories: Category | undefined;
     slug: string | undefined;
 }
 
-interface PostProps {
+interface PostCategoryProps {
     createdAt: string;
     image: { url: string }
     slug: string;
     title: string;
 }
 export const PostWidget = ({ categories, slug }: PostWidgetProps) => {
-    const [posts, setPosts] = useState<PostProps[]>([]);
+    const [posts, setPosts] = useState<PostCategoryProps[]>([]);
 
     useEffect(() => {
         if (slug) {

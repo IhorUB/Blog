@@ -1,11 +1,17 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
 import { PostCard, PostWidget, Categories } from '../components/index';
 import { getPosts } from '../services/';
 import { Post } from '../interfaces/Post';
 
+interface PostProps extends Post {
+  node: Post;
+}
+interface HomeProps {
+  posts: PostProps[];
+}
 
-export default function Home({ posts }: any) {
+export default function Home({ posts }: HomeProps) {
   return (
     <div className='container m-auto pb-8 px-15'>
       <Head>
@@ -33,11 +39,10 @@ export default function Home({ posts }: any) {
   )
 }
 
-export async function getStaticProps() {
+
+export const getStaticProps: GetStaticProps = async () => {
   const posts = (await getPosts() || []);
   return {
     props: { posts }
   }
 }
-
-

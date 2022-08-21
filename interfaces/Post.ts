@@ -9,4 +9,5 @@ export interface Post {
   slug: string;
   image: { url: string };
   createdAt: string;
+  content?: any;
 }
